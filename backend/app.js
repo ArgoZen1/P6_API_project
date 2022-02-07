@@ -1,22 +1,21 @@
 // importation de express
 const express = require("express");
-// console.log(express);
 
 // importation de morgan (logger http);
-const morgan = require ("morgan");
+const morgan = require("morgan");
 
 // importation connexion base de donnée mongoDB
-const mongoose =require ("./db/db");
+const mongoose = require("./db/db");
+
+// importation de path
+const path = require('path');
 
 //importation des routes 
 const userRoutes = require("./routes/user");
-// const getSauces = require("./routes/getSauces")
-
-// importation de body-parser 
-const bodyParser = require("body-parser");
+const saucesRoutes = require("./routes/saucesRoutes");
 
 //importation du model Sauces.js 
-const Sauces= require('./models/Sauces');
+const Sauces = require('./models/Sauces');
 
 // pour créer une application express
 const app = express();
@@ -36,20 +35,22 @@ app.use((req, res, next) => {
     );
     res.setHeader(
         "Access-Control-Allow-Methods",
-        "Get, POST, PUT, DELETE, PATCH, OPTIONS" 
+        "Get, POST, PUT, DELETE, PATCH, OPTIONS"
     );
     next();
 });
 
 // transformer le corps (body) en JSON
-app.use(bodyParser.json());
+app.use(express.json());
+
+// route de l'image
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // route d'autentification 
 app.use("/api/auth", userRoutes);
 
-// création de la route array of sauces 
-// app.use('/api/sauces')
-    
+// création de la route pour la fiche sauce 
+app.use("/api/sauces", saucesRoutes);
 
 // exportation de app.js pour pouvoir y accéder depuis un autre fichier
 module.exports = app;
