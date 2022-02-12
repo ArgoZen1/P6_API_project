@@ -11,10 +11,10 @@ const result = dotenv.config();
 
 app.set('port', process.env.PORT || 3000);
 
-// la méthode createServer prend en argument la fonction qui sera
-// appelée à chaque requête reçu par le serveur
-// Les fonctions seront dans app.js
 const server = http.createServer(app);
 
 // Le serveur écoute les requêtes sur le port
 server.listen(process.env.PORT || 3000);
+// la méthode createServer prend en argument la fonction qui sera
+// appelée à chaque requête reçu par le serveur
+// Les fonctions seront dans app.js

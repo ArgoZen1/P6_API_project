@@ -2,6 +2,7 @@
 Mettre les informations pour les variables d'environnement (base de donnée MongoDB Atlas)
 
 pour lancer le serveur : `$ nodemon server`
+pour lancer le front : `$ npm run start`
 
 # Routes
 ## La route POST pour créer un compte 

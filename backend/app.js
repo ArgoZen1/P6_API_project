@@ -4,6 +4,9 @@ const express = require("express");
 // importation de morgan (logger http);
 const morgan = require("morgan");
 
+//importation de helmet
+const helmet = require("helmet");
+
 // importation connexion base de donnée mongoDB
 const mongoose = require("./db/db");
 
@@ -39,6 +42,8 @@ app.use((req, res, next) => {
     );
     next();
 });
+
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
 // transformer le corps (body) en JSON
 app.use(express.json());
